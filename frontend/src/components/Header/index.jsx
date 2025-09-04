@@ -1,0 +1,56 @@
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
+
+export default function Header() {
+    const [isOpen, setIsOpen] = useState(false);
+    const menuRef = useRef(null);
+
+    // Fecha dropdown ao clicar fora
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    return (
+        <header className="shadow-md">
+            <div className="flex items-center justify-between px-4 sm:px-8 py-2 max-w-7xl mx-auto">
+                
+                {/* Logo */}
+                <Link to={'/'} className="flex items-center text-white text-2xl font-bold">
+                    <p>Bracket</p>
+                    <span className="text-red-500">Tube</span>
+                </Link>
+
+                {/* Botão usuário + dropdown */}
+                <div className="relative" ref={menuRef}>
+                    <div
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="flex items-center border ring pr-4 pl-6 py-2 rounded-full gap-2 shadow-md cursor-pointer text-white transition"
+                    >
+                        <Bars3Icon className="size-5" />
+                        <UserCircleIcon className="size-8" />
+                        <p className="max-w-20 sm:max-w-32 truncate">Lucas Bonde</p>
+                    </div>
+
+                    {isOpen && (
+                        <div className="absolute right-0 mt-2 w-48 bg-zinc-900 rounded-xl shadow-lg ring-1 ring-black/5 overflow-hidden">
+                            <button className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
+                                Perfil
+                            </button>
+
+                            <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-zinc-800 cursor-pointer">
+                                Sair
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </header>
+    );
+}
