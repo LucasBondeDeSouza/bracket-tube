@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 
-export default function Header() {
+export default ({ user }) => {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -29,14 +29,15 @@ export default function Header() {
 
                 {/* Botão usuário + dropdown */}
                 <div className="relative" ref={menuRef}>
-                    <div
-                        onClick={() => setIsOpen(!isOpen)}
+                    <Link
+                        to={!user && "/login"}
+                        onClick={() => user && setIsOpen(!isOpen)}
                         className="flex items-center border ring pr-4 pl-6 py-2 rounded-full gap-2 shadow-md cursor-pointer text-white transition"
                     >
                         <Bars3Icon className="size-5" />
                         <UserCircleIcon className="size-8" />
-                        <p className="max-w-20 sm:max-w-32 truncate">Lucas Bonde</p>
-                    </div>
+                        {user && <p className="max-w-20 sm:max-w-32 truncate">{user.name}</p>}
+                    </Link>
 
                     {isOpen && (
                         <div className="absolute right-0 mt-2 w-48 bg-zinc-900 rounded-xl shadow-lg ring-1 ring-black/5 overflow-hidden">
