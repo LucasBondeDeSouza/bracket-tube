@@ -25,6 +25,7 @@ export default ({ setUser }) => {
             toast.error(err.response.data, {
                 position: "top-right",
                 autoClose: 3000,
+                theme: "dark"
             })
             setName('')
             setEmail('')

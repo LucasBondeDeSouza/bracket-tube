@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 
+import { toast } from "react-toastify";
+
 export default ({ user }) => {
+    const [redirect, setRedirect] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -16,6 +19,21 @@ export default ({ user }) => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
+
+    const logout = async () => {
+        try {
+            const { data } = await axios.post("/users/logout")
+            setRedirect(true)
+        } catch (error) {
+            toast.error(JSON.stringify(error), {
+                position: "top-right",
+                autoClose: 3000,
+                theme: "dark"
+            })
+        }
+    }
+
+    if (redirect) return <Navigate to="/" />
 
     return (
         <header className="shadow-md">
@@ -45,7 +63,7 @@ export default ({ user }) => {
                                 Perfil
                             </button>
 
-                            <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-zinc-800 cursor-pointer">
+                            <button onClick={logout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-zinc-800 cursor-pointer">
                                 Sair
                             </button>
                         </div>
