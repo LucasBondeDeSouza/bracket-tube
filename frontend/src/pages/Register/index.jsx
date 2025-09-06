@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default ({ setUser }) => {
     const [name, setName] = useState("")
@@ -12,7 +13,8 @@ export default ({ setUser }) => {
         e.preventDefault()
 
         try {
-            const { data: userDoc } = await axios.post("/users/login", {
+            const { data: userDoc } = await axios.post("/users", {
+                name,
                 email,
                 password
             })
@@ -20,7 +22,13 @@ export default ({ setUser }) => {
             setUser(userDoc)
             setRedirect(true)
         } catch (err) {
-            alert(`Deu um erro ao logar: ${err.response.data}`)
+            toast.error(err.response.data, {
+                position: "top-right",
+                autoClose: 3000,
+            })
+            setName('')
+            setEmail('')
+            setPassword('')
         }
     }
 
@@ -31,13 +39,14 @@ export default ({ setUser }) => {
             <div className="mx-auto max-w-96 flex flex-col items-center gap-4 w-full">
                 <h1 className="text-3xl font-bold">Faça seu cadastro</h1>
 
-                <form  className="flex flex-col gap-2 w-full">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full">
                     <input 
                         type="text"
                         className="w-full rounded-lg border px-4 py-2"
                         placeholder="Digite seu nome"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        required
                     />
 
                     <input 
@@ -46,6 +55,7 @@ export default ({ setUser }) => {
                         placeholder="Digite seu e-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
 
                     <input 
@@ -54,6 +64,7 @@ export default ({ setUser }) => {
                         placeholder="Digite sua senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
 
                     <button className="w-full rounded-lg bg-red-500 font-bold px-4 py-2 cursor-pointer">

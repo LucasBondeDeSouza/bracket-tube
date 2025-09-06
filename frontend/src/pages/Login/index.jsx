@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios"
 
+import { toast } from "react-toastify";
+
 export default ({ user, setUser }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -19,7 +21,12 @@ export default ({ user, setUser }) => {
             setUser(userDoc)
             setRedirect(true)
         } catch (err) {
-            alert(`Deu um erro ao logar: ${err.response.data}`)
+            toast.error(err.response.data, {
+                position: "top-right",
+                autoClose: 3000,
+            })
+            setEmail('')
+            setPassword('')
         }
     }
 
