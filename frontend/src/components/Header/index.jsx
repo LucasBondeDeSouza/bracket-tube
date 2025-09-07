@@ -3,8 +3,10 @@ import { Link, Navigate } from "react-router-dom";
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 import { toast } from "react-toastify";
+import { useUserContext } from "../../context/UserContext";
 
-export default ({ user }) => {
+export default () => {
+    const { user } = useUserContext()
     const [redirect, setRedirect] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);

@@ -3,8 +3,10 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios"
 
 import { toast } from "react-toastify";
+import { useUserContext } from "../../context/UserContext";
 
-export default ({ user, setUser }) => {
+export default () => {
+    const { user, setUser } = useUserContext()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [redirect, setRedirect] = useState(false)

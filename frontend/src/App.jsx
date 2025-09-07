@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import axios from "axios"
+
+import { UserContextProvider } from "./context/UserContext";
 
 import { ToastContainer } from "react-toastify";
 import Register from "./pages/Register";
@@ -12,29 +14,20 @@ axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 axios.defaults.withCredentials = true
 
 export default () => {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    const axiosGet = async () => {
-      const { data } = await axios.get("/users/profile")
-
-      setUser(data)
-    }
-
-    axiosGet()
-  }, [])
 
   return (
     <div className="bg-zinc-900 min-h-screen text-white">
-      <BrowserRouter>
-        <Header user={user} />
+      <UserContextProvider>
+        <BrowserRouter>
+          <Header />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register setUser={setUser} />} />
-          <Route path="/login" element={<Login user={user} setUser={setUser} />} />
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContextProvider>
 
       <ToastContainer />
     </div>
