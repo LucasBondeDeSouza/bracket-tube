@@ -8,7 +8,6 @@ import { useUserContext } from "../../context/UserContext";
 
 export default () => {
     const { user, setUser } = useUserContext()
-    const [redirect, setRedirect] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
     const navigate = useNavigate()
@@ -65,6 +64,10 @@ export default () => {
                             <button className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
                                 Perfil
                             </button>
+
+                            <Link to={"/create-game"} className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
+                                Criar Jogo
+                            </Link>
 
                             <button onClick={logout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-zinc-800 cursor-pointer">
                                 Sair
