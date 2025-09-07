@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 import { toast } from "react-toastify";
 import { useUserContext } from "../../context/UserContext";
 
 export default () => {
-    const { user } = useUserContext()
+    const { user, setUser } = useUserContext()
     const [redirect, setRedirect] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
+    const navigate = useNavigate()
 
     // Fecha dropdown ao clicar fora
     useEffect(() => {
@@ -24,8 +26,9 @@ export default () => {
 
     const logout = async () => {
         try {
-            const { data } = await axios.post("/users/logout")
-            setRedirect(true)
+            await axios.post("/users/logout")
+            setUser(null)
+            navigate("/")
         } catch (error) {
             toast.error(JSON.stringify(error), {
                 position: "top-right",
@@ -34,8 +37,6 @@ export default () => {
             })
         }
     }
-
-    if (redirect) return <Navigate to="/" />
 
     return (
         <header className="shadow-md">
