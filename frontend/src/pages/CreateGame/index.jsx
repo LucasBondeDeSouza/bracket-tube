@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { ArrowUpTrayIcon } from '@heroicons/react/24/solid'
+import axios from "axios"
 
 export default () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [photos, setPhotos] = useState("")
+    const [coverImage, setCoverImage] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        // const newTournament = await axios.post('/tournaments', {
+
+        // })
     }
 
     return (

@@ -1,6 +1,7 @@
 import "dotenv/config"
 import express from "express"
 import UserRoutes from "./domains/users/routes.js"
+import TournamentRoutes from "./domains/tournaments/routes.js"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 
@@ -14,6 +15,7 @@ app.use(cors({
     credentials: true,
 }))
 app.use("/users", UserRoutes)
+app.use("/tournaments", TournamentRoutes)
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`)
