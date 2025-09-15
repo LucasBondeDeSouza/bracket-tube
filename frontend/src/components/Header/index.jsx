@@ -65,7 +65,7 @@ export default () => {
                                 Perfil
                             </button>
 
-                            <Link to={"/create-game"} className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
+                            <Link to={"/create-tournament"} className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
                                 Criar Jogo
                             </Link>
 
