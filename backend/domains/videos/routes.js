@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
         }
 
         const newVideoDoc = await Video.create({
-            tournament: tournamentId,
+            owner: tournamentId,
             title,
             video_id
         })
@@ -54,7 +54,7 @@ router.get("/", async (req, res) => {
     const { tournamentId } = req.query
 
     try {
-        const items = await Video.find({ tournament: tournamentId })
+        const items = await Video.find({ owner: tournamentId })
             .sort({ created_at: -1 })
 
         res.json(items)

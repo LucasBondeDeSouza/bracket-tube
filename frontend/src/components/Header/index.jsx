@@ -61,9 +61,9 @@ export default () => {
 
                     {isOpen && (
                         <div className="absolute right-0 mt-2 w-48 bg-zinc-900 rounded-xl shadow-lg ring-1 ring-black/5 overflow-hidden">
-                            <button className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
+                            <Link to={"/profile"} className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
                                 Perfil
-                            </button>
+                            </Link>
 
                             <Link to={"/create-tournament"} className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 cursor-pointer">
                                 Criar Jogo
