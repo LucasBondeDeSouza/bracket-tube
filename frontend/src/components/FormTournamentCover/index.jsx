@@ -4,7 +4,7 @@ import axios from "axios"
 import { ArrowUpTrayIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import { toast } from "react-toastify";
 
-export default ({ title, setTitle, description, setDescription, coverImage, setCoverImage }) => {
+export default ({ handleSubmit, title, setTitle, description, setDescription, coverImage, setCoverImage }) => {
 
     const uploadCoverImage = async (e) => {
         const file = e.target.files[0]
@@ -32,7 +32,7 @@ export default ({ title, setTitle, description, setDescription, coverImage, setC
     }
 
     return (
-        <form className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
                 <label htmlFor="title" className="text-3xl font-bold">Título</label>
                 

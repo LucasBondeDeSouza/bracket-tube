@@ -9,7 +9,7 @@ import FormTournamentHeader from "../../components/FormTournamentHeader/index.js
 
 export default () => {
     const { user } = useUserContext()
-    const [selectStage, setSelectStage] = useState("choises")
+    const [selectStage, setSelectStage] = useState("cover")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [coverImage, setCoverImage] = useState("")
@@ -19,13 +19,12 @@ export default () => {
         e.preventDefault()
 
         try {
-            const newTournament = await axios.post('/tournaments', {
+            const { data: createdTournament } = await axios.post('/tournaments', {
                 title,
                 description,
                 coverImage
             })
 
-            const createdTournament = res.data
             const id = createdTournament._id
 
             setTournamentId(id)
@@ -53,6 +52,7 @@ export default () => {
 
                 {selectStage === "cover" && (
                     <FormTournamentCover
+                        handleSubmit={handleSubmit}
                         title={title} setTitle={setTitle}
                         description={description} setDescription={setDescription}
                         coverImage={coverImage} setCoverImage={setCoverImage}
