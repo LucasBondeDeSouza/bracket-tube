@@ -5,6 +5,7 @@ const tournamentsSchema = new Schema({
     title: String,
     description: String,
     coverImage: String,
+    category: { type: String, default: "Desconhecido" },
     created_at: { type: Date, default: Date.now }
 })
 

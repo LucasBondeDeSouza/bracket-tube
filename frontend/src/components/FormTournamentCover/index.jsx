@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios"
-
 import { ArrowUpTrayIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import { toast } from "react-toastify";
 
@@ -86,7 +85,7 @@ export default ({ handleSubmit, title, setTitle, description, setDescription, co
 
             <div className="flex justify-end">
                 <button className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
-                    Escolher Vídeos
+                    Adicionar Vídeos
                     <ArrowRightIcon className="size-4" />
                 </button>
             </div>

@@ -88,4 +88,52 @@ router.delete("/", async (req, res) => {
     }
 });
 
+// Buscar um torneio específico pelo ID
+router.get("/:id", async (req, res) => {
+    connectDb();
+
+    const { id } = req.params;
+
+    try {
+        const { _id: owner } = await JWTVerify(req);
+
+        const tournament = await Tournament.findOne({ _id: id, owner });
+        if (!tournament) {
+            return res.status(404).json({ message: "Torneio não encontrado" });
+        }
+
+        res.json(tournament);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro ao buscar torneio", error });
+    }
+});
+
+// Atualizar um torneio existente
+router.put("/:id", async (req, res) => {
+    connectDb();
+
+    const { id } = req.params;
+    const { title, description, coverImage } = req.body;
+
+    try {
+        const { _id: owner } = await JWTVerify(req);
+
+        const updatedTournament = await Tournament.findOneAndUpdate(
+            { _id: id, owner },
+            { title, description, coverImage },
+            { new: true }
+        );
+
+        if (!updatedTournament) {
+            return res.status(404).json({ message: "Torneio não encontrado ou você não tem permissão" });
+        }
+
+        res.json(updatedTournament);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro ao atualizar torneio", error });
+    }
+});
+
 export default router

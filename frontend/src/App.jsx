@@ -28,7 +28,7 @@ export default () => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/create-tournament" element={<CreateTournament />} />
+            <Route path="/create-tournament/:tournament_id?" element={<CreateTournament />} />
           </Routes>
         </BrowserRouter>
       </UserContextProvider>

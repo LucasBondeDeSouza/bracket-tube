@@ -6,14 +6,14 @@ export default ({ selectStage, setSelectStage }) => {
         <div className="flex gap-3 mb-10 text-xl">
             <span 
                 className={`${selectStage == "cover" && "text-red-500"}`}>
-                    Cover
+                    Capa
             </span>
 
             <span>|</span>
             
             <span 
                 className={`${selectStage == "choises" && "text-red-500"}`}>
-                    Incluir Vídeos
+                    Adicionar Vídeos
             </span>
 
             <span>|</span>
