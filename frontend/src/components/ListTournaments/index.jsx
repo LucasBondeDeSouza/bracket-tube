@@ -3,10 +3,10 @@ import React from "react";
 import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid'
 import { Link } from "react-router-dom";
 
-export default ({ tournaments, profile=False, handleDelete }) => {
+export default ({ tournaments, profile=false, handleDelete }) => {
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 py-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 my-10">
             {tournaments.map((item, index) => (
                 <div key={index} className="flex flex-col cursor-pointer relative">
                     <div

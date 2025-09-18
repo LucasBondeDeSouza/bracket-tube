@@ -25,7 +25,7 @@ export default ({ setSelectStage, tournamentId, category, setCategory }) => {
                 category
             });
 
-            toast.success("Torneio atualizado com sucesso!", {
+            toast.success("Alterações feitas com sucesso!", {
                 position: "top-right",
                 autoClose: 3000,
                 theme: "dark"

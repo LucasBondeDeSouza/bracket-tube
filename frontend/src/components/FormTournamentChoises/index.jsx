@@ -74,7 +74,7 @@ export default ({ setSelectStage, tournamentId }) => {
     );
 
     return (
-        <div className="">
+        <div className="min-h-96 flex flex-col justify-between">
             <div className="flex flex-col gap-9">
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-2">
@@ -114,7 +114,7 @@ export default ({ setSelectStage, tournamentId }) => {
 
             <ListVideosTournaments videos={filteredVideos} setVideos={setVideos} />
 
-            <div className="flex justify-between py-5">
+            <div className="flex justify-between">
                 <button onClick={() => setSelectStage("cover") } className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
                     <ArrowLeftIcon className="size-5" />
                     Capa

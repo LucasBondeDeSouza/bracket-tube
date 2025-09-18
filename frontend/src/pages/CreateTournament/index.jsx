@@ -57,12 +57,6 @@ export default () => {
                     coverImage
                 })
                 id = tournament_id
-
-                toast.success("Torneio atualizado com sucesso!", {
-                    position: "top-right",
-                    autoClose: 3000,
-                    theme: "dark"
-                })
             } else {
                 // Cria novo torneio
                 const { data: createdTournament } = await axios.post('/tournaments', {
@@ -71,12 +65,6 @@ export default () => {
                     coverImage
                 })
                 id = createdTournament._id
-
-                toast.success("Torneio criado com sucesso!", {
-                    position: "top-right",
-                    autoClose: 3000,
-                    theme: "dark"
-                })
             }
 
             navigate(`/create-tournament/${id}`)

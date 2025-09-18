@@ -7,6 +7,20 @@ import { sendToS3, uploadImage } from "./controller.js";
 
 const router = Router()
 
+router.get("/", async (req, res) => {
+    connectDb()
+
+    try {
+        const items = await Tournament.find()
+            .sort({ created_at: -1 })
+
+        res.json(items)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: 'Deu erro ao carregar os torneios', error })
+    }
+})
+
 router.get("/my-tournaments", async (req, res) => {
     connectDb()
 
