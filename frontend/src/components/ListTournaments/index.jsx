@@ -21,7 +21,7 @@ export default ({ tournaments, profile=False, handleDelete }) => {
                     </div>
 
                     <div className="rounded-b-lg flex flex-col bg-zinc-800 px-3 py-2">
-                        <p className="text-end text-gray-300">{item.category}</p>
+                        <p className="text-end text-gray-300 capitalize">{item.category}</p>
                         <h1 className="text-2xl line-clamp-1">{item.title}</h1>
                         <p className="text-sm text-gray-300 line-clamp-1">{item.description}</p>
                     </div>

@@ -116,13 +116,13 @@ export default ({ setSelectStage, tournamentId }) => {
 
             <div className="flex justify-between py-5">
                 <button onClick={() => setSelectStage("cover") } className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
-                    <ArrowLeftIcon className="size-4" />
+                    <ArrowLeftIcon className="size-5" />
                     Capa
                 </button>
 
                 <button onClick={() => setSelectStage("publish") } className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
                     Publicar
-                    <ArrowRightIcon className="size-4" />
+                    <ArrowRightIcon className="size-5" />
                 </button>
             </div>
         </div>

@@ -86,7 +86,7 @@ export default ({ handleSubmit, title, setTitle, description, setDescription, co
             <div className="flex justify-end">
                 <button className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
                     Adicionar Vídeos
-                    <ArrowRightIcon className="size-4" />
+                    <ArrowRightIcon className="size-5" />
                 </button>
             </div>
         </form>

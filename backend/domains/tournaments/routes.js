@@ -136,4 +136,38 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+router.put("/category/:id", async (req, res) => {
+    connectDb();
+
+    try {
+        const { id } = req.params;
+        const { category } = req.body;
+
+        const { _id: owner } = await JWTVerify(req);
+
+        const updatedTournament = await Tournament.findOneAndUpdate(
+            { _id: id, owner },
+            { category },
+            { new: true }
+        );
+
+        if (!updatedTournament) {
+            return res.status(404).json({
+                message: "Torneio não encontrado ou você não tem permissão"
+            });
+        }
+
+        res.json({
+            message: "Categoria atualizada com sucesso",
+            tournament: updatedTournament
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Erro ao atualizar a categoria",
+            error
+        });
+    }
+});
+
 export default router

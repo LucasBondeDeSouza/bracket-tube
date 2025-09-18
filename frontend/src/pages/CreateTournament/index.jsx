@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext.jsx"
 import { toast } from "react-toastify";
 
@@ -10,13 +10,14 @@ import FormTournamentHeader from "../../components/FormTournamentHeader/index.js
 import FormTournamentPublish from "../../components/FormTournamentPublish/index.jsx";
 
 export default () => {
-    const { user } = useUserContext()
+    const navigate = useNavigate()
     const { tournament_id } = useParams()
 
-    const [selectStage, setSelectStage] = useState("publish")
+    const [selectStage, setSelectStage] = useState("cover")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [coverImage, setCoverImage] = useState("")
+    const [category, setCategory] = useState("")
     const [tournamentId, setTournamentId] = useState(null)
 
     // Quando estiver editando, buscar os dados atuais do torneio
@@ -27,6 +28,7 @@ export default () => {
                 setTitle(data.title)
                 setDescription(data.description)
                 setCoverImage(data.coverImage)
+                setCategory(data.category)
                 setTournamentId(data._id)
             } catch (error) {
                 console.error(error)
@@ -77,7 +79,7 @@ export default () => {
                 })
             }
 
-            setTournamentId(id)
+            navigate(`/create-tournament/${id}`)
             setSelectStage("choises")
         } catch (error) {
             console.error(error)
@@ -105,11 +107,19 @@ export default () => {
                 )}
 
                 {selectStage === "choises" && (
-                    <FormTournamentChoises setSelectStage={setSelectStage} tournamentId={tournamentId || tournament_id} />
+                    <FormTournamentChoises 
+                        setSelectStage={setSelectStage} 
+                        tournamentId={tournamentId || tournament_id} 
+                    />
                 )}
 
                 {selectStage === "publish" && (
-                    <FormTournamentPublish setSelectStage={setSelectStage} tournamentId={tournamentId || tournament_id} />
+                    <FormTournamentPublish 
+                        setSelectStage={setSelectStage} 
+                        tournamentId={tournamentId || tournament_id}
+                        category={category}
+                        setCategory={setCategory}
+                    />
                 )}
             </div>
         </div>

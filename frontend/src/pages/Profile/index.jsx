@@ -17,6 +17,9 @@ export default () => {
     }
 
     const handleDelete = async (tournamentId) => {
+        const confirmed = window.confirm("Tem certeza que deseja excluir este torneio?");
+        if (!confirmed) return;
+        
         try {
             await axios.delete("/tournaments", { data: { tournamentId } });
             
