@@ -10,6 +10,7 @@ import FormTournamentHeader from "../../components/FormTournamentHeader/index.js
 import FormTournamentPublish from "../../components/FormTournamentPublish/index.jsx";
 
 export default () => {
+    const { user } = useUserContext()
     const navigate = useNavigate()
     const { tournament_id } = useParams()
 
@@ -19,6 +20,12 @@ export default () => {
     const [coverImage, setCoverImage] = useState("")
     const [category, setCategory] = useState("")
     const [tournamentId, setTournamentId] = useState(null)
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/");
+        }
+    }, [user, navigate]);
 
     // Quando estiver editando, buscar os dados atuais do torneio
     useEffect(() => {
@@ -82,7 +89,7 @@ export default () => {
     return (
         <div className="flex items-center py-8">
             <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
-                <FormTournamentHeader selectStage={selectStage} setSelectStage={setSelectStage} />
+                <FormTournamentHeader tournamentId={tournamentId || tournament_id}  selectStage={selectStage} setSelectStage={setSelectStage} />
 
                 {selectStage === "cover" && (
                     <FormTournamentCover
@@ -101,7 +108,7 @@ export default () => {
                     />
                 )}
 
-                {selectStage === "publish" && (
+                {selectStage === "category" && (
                     <FormTournamentPublish 
                         setSelectStage={setSelectStage} 
                         tournamentId={tournamentId || tournament_id}

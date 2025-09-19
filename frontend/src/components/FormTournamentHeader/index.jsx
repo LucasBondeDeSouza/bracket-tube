@@ -1,26 +1,29 @@
 import React from "react";
 
-export default ({ selectStage, setSelectStage }) => {
+export default ({ tournamentId, selectStage, setSelectStage }) => {
 
     return (
         <div className="flex gap-3 mb-10 text-xl">
             <span 
-                className={`${selectStage == "cover" && "text-red-500"}`}>
+                onClick={() => tournamentId && setSelectStage("cover")}
+                className={`${selectStage == "cover" && "text-red-500"} cursor-pointer`}>
                     Capa
             </span>
 
             <span>|</span>
             
             <span 
-                className={`${selectStage == "choises" && "text-red-500"}`}>
+                onClick={() => tournamentId && setSelectStage("choises")}
+                className={`${selectStage == "choises" && "text-red-500"} cursor-pointer`}>
                     Adicionar Vídeos
             </span>
 
             <span>|</span>
 
             <span 
-                className={`${selectStage == "publish" && "text-red-500"}`}>
-                    Publicar
+                onClick={() => tournamentId && setSelectStage("category")}
+                className={`${selectStage == "category" && "text-red-500"} cursor-pointer`}>
+                    Categoria
             </span>
         </div>
     )

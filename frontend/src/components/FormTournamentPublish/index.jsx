@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { toast } from "react-toastify";
 
+import SelectCategory from "../SelectCategory"
+
 export default ({ setSelectStage, tournamentId, category, setCategory }) => {
     const navigate = useNavigate()
 
@@ -47,27 +49,7 @@ export default ({ setSelectStage, tournamentId, category, setCategory }) => {
                 <label htmlFor="category" className="text-3xl font-bold">Categoria</label>
                 
                 <div className="flex gap-2">
-                    <select
-                        id="category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="block w-full rounded-lg border bg-zinc-800 px-3 py-2 text-sm shadow-sm 
-                                    focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer"
-                    >
-                        <option value="Desconhecido" disabled selected>
-                            Selecione uma categoria
-                        </option>
-
-                        <option value="musica">Música</option>
-                        <option value="esportes">Esportes</option>
-                        <option value="filmes">Filmes e Séries</option>
-                        <option value="games">Games</option>
-                        <option value="comedia">Comédia</option>
-                        <option value="animacao">Animação</option>
-                        <option value="entretenimento">Entretenimento</option>
-                        <option value="animais">Animais</option>
-                        <option value="outros">Outros</option>
-                    </select>
+                    <SelectCategory category={category} setCategory={setCategory} />
                 </div>
             </div>
 
