@@ -184,4 +184,35 @@ router.put("/category/:id", async (req, res) => {
     }
 });
 
+router.get("/:id/videos", async (req, res) => {
+    connectDb()
+    const { id } = req.params;
+
+    try {
+        const { _id: owner } = await JWTVerify(req);
+
+        // Garante que o torneio existe
+        const tournament = await Tournament.findOne({ _id: id, owner });
+        if (!tournament) {
+            return res.status(404).json({ message: "Torneio não encontrado" });
+        }
+
+        // Busca os vídeos relacionados ao torneio
+        const videos = await Video.find({ owner: id });
+
+        // Monta a resposta
+        const response = {
+            _id: tournament._id,
+            title: tournament.title,
+            description: tournament.description,
+            videos
+        };
+
+        res.json(response);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro ao buscar vídeos do torneio", error });
+    }
+});
+
 export default router

@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CreateTournament from "./pages/CreateTournament";
 import Profile from "./pages/Profile";
+import Tournament from "./pages/Tournament";
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 axios.defaults.withCredentials = true
@@ -29,6 +30,7 @@ export default () => {
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/create-tournament/:tournament_id?" element={<CreateTournament />} />
+            <Route path="/tournament/:tournament_id" element={<Tournament />} />
           </Routes>
         </BrowserRouter>
       </UserContextProvider>

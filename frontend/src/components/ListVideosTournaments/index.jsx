@@ -4,7 +4,7 @@ import { TrashIcon } from '@heroicons/react/24/solid'
 
 import { toast } from "react-toastify";
 
-export default ({ videos, setVideos }) => {
+export default ({ videos, setVideos, edit }) => {
 
     const handleDelete = async (videoId) => {
         try {
@@ -38,15 +38,17 @@ export default ({ videos, setVideos }) => {
                     </div>
                     <p className="mt-2 font-semibold">{video.title}</p>
 
-                    <div className="absolute right-1 top-1">
-                        <button 
-                            title="Excluir" 
-                            className="bg-red-600 rounded-full p-2 cursor-pointer"
-                            onClick={() => handleDelete(video._id)}
-                        >
-                            <TrashIcon className="w-5 h-5" />
-                        </button>
-                    </div>
+                    {edit && (
+                        <div className="absolute right-1 top-1">
+                            <button 
+                                title="Excluir" 
+                                className="bg-red-600 rounded-full p-2 cursor-pointer"
+                                onClick={() => handleDelete(video._id)}
+                            >
+                                <TrashIcon className="w-5 h-5" />
+                            </button>
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

@@ -48,7 +48,11 @@ export default () => {
             <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
                 <h1 className="text-3xl font-bold">Meus Torneios</h1>
 
-                <ListTournaments tournaments={tournaments} profile={true} handleDelete={handleDelete} />
+                <ListTournaments 
+                    tournaments={tournaments} 
+                    profile={true} 
+                    handleDelete={handleDelete}
+                />
             </div>
         </div>
     )
