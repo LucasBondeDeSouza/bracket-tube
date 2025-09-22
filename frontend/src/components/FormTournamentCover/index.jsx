@@ -3,7 +3,9 @@ import axios from "axios"
 import { ArrowUpTrayIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import { toast } from "react-toastify";
 
-export default ({ handleSubmit, title, setTitle, description, setDescription, coverImage, setCoverImage }) => {
+import SelectCategory from "../SelectCategory"
+
+export default ({ handleSubmit, title, setTitle, description, setDescription, coverImage, setCoverImage, category, setCategory }) => {
 
     const uploadCoverImage = async (e) => {
         const file = e.target.files[0]
@@ -81,6 +83,11 @@ export default ({ handleSubmit, title, setTitle, description, setDescription, co
                         </>
                     )}
                 </label>
+            </div>
+
+            <div className="flex flex-col gap-2">
+                <label htmlFor="category" className="text-3xl font-bold">Categoria</label>
+                <SelectCategory category={category} setCategory={setCategory} />
             </div>
 
             <div className="flex justify-end">

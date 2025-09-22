@@ -5,16 +5,15 @@ import { useUserContext } from "../../context/UserContext.jsx"
 import { toast } from "react-toastify";
 
 import FormTournamentCover from "../../components/FormTournamentCover/index.jsx";
-import FormTournamentChoises from "../../components/FormTournamentChoises/index.jsx";
+import FormTournamentAddVideos from "../../components/FormTournamentAddVideos/index.jsx";
 import FormTournamentHeader from "../../components/FormTournamentHeader/index.jsx";
-import FormTournamentPublish from "../../components/FormTournamentPublish/index.jsx";
 
 export default () => {
     const { user } = useUserContext()
     const navigate = useNavigate()
     const { tournament_id } = useParams()
 
-    const [selectStage, setSelectStage] = useState("cover")
+    const [selectStage, setSelectStage] = useState("create-tournament")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [coverImage, setCoverImage] = useState("")
@@ -56,12 +55,22 @@ export default () => {
         try {
             let id
 
+            if (category == "") {
+                toast.error("Por favor, selecione uma categoria!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    theme: "dark"
+                });
+                return;
+            }
+
             if (tournament_id) {
                 // Atualiza torneio existente
                 await axios.put(`/tournaments/${tournament_id}`, {
                     title,
                     description,
-                    coverImage
+                    coverImage,
+                    category
                 })
                 id = tournament_id
             } else {
@@ -69,13 +78,14 @@ export default () => {
                 const { data: createdTournament } = await axios.post('/tournaments', {
                     title,
                     description,
-                    coverImage
+                    coverImage,
+                    category
                 })
                 id = createdTournament._id
             }
 
             navigate(`/create-tournament/${id}`)
-            setSelectStage("choises")
+            setSelectStage("add-videos")
         } catch (error) {
             console.error(error)
             toast.error("Erro ao salvar os dados do torneio", {
@@ -91,29 +101,21 @@ export default () => {
             <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
                 <FormTournamentHeader tournamentId={tournamentId || tournament_id}  selectStage={selectStage} setSelectStage={setSelectStage} />
 
-                {selectStage === "cover" && (
+                {selectStage === "create-tournament" && (
                     <FormTournamentCover
                         tournament_id={tournament_id}
                         handleSubmit={handleSubmit}
                         title={title} setTitle={setTitle}
                         description={description} setDescription={setDescription}
                         coverImage={coverImage} setCoverImage={setCoverImage}
+                        category={category} setCategory={setCategory}
                     />
                 )}
 
-                {selectStage === "choises" && (
-                    <FormTournamentChoises 
+                {selectStage === "add-videos" && (
+                    <FormTournamentAddVideos 
                         setSelectStage={setSelectStage} 
                         tournamentId={tournamentId || tournament_id} 
-                    />
-                )}
-
-                {selectStage === "category" && (
-                    <FormTournamentPublish 
-                        setSelectStage={setSelectStage} 
-                        tournamentId={tournamentId || tournament_id}
-                        category={category}
-                        setCategory={setCategory}
                     />
                 )}
             </div>

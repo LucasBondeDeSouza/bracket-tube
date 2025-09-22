@@ -115,14 +115,9 @@ export default ({ setSelectStage, tournamentId }) => {
             <ListVideosTournaments videos={filteredVideos} setVideos={setVideos} edit={true} />
 
             <div className="flex justify-between">
-                <button onClick={() => setSelectStage("cover") } className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
+                <button onClick={() => setSelectStage("create-tournament") } className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
                     <ArrowLeftIcon className="size-5" />
-                    Capa
-                </button>
-
-                <button onClick={() => setSelectStage("category") } className="flex items-center gap-3 rounded-lg bg-red-500 text-white font-bold px-6 py-2 cursor-pointer">
-                    Categoria
-                    <ArrowRightIcon className="size-5" />
+                    Criar Torneio
                 </button>
             </div>
         </div>

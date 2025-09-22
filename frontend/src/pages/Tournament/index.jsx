@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ListVideosTournaments from "../../components/ListVideosTournaments";
+import Play from "../Play"
 
 export default () => {
     const { tournament_id } = useParams();
     const [tournament, setTournament] = useState(null);
+    const [startGame, setStartGame] = useState(true)
 
     useEffect(() => {
         const fetchTournament = async () => {
@@ -22,8 +24,6 @@ export default () => {
 
     if (!tournament) return <p>Carregando...</p>;
 
-    console.log(tournament)
-
     return (
         <div className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between">
@@ -38,6 +38,8 @@ export default () => {
             </div>
 
             <ListVideosTournaments videos={tournament.videos} edit={false} />
+
+            {startGame && <Play tournament={tournament} />}
         </div>
     );
 };
