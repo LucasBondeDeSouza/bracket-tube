@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
-import TournamentBracket from "../../components/tournamentBracket"
+import TournamentBracket from "../../components/TournamentBracket"
 
 export default () => {
     const { tournament_id } = useParams();
