@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+
+import Header from "../../components/Header";
 import ListTournaments from "../../components/ListTournaments";
 import SelectCategory from "../../components/SelectCategory";
 
@@ -34,25 +36,29 @@ export default () => {
     });
 
     return (
-        <div className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto">
-            <div className="w-full flex items-center justify-between gap-4">
-                <div className="basis-1/2 sm:basis-auto sm:w-auto">
-                    <SelectCategory category={category} setCategory={setCategory} />
+        <>
+            <Header />
+
+            <div className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto">
+                <div className="w-full flex items-center justify-between gap-4">
+                    <div className="basis-1/2 sm:basis-auto sm:w-auto">
+                        <SelectCategory category={category} setCategory={setCategory} />
+                    </div>
+
+                    <div className="basis-1/2 sm:flex-1 flex items-center py-2 px-4 rounded-md ring cursor-pointer">
+                        <MagnifyingGlassIcon className="size-5" />
+                        <input
+                            type="text"
+                            value={search}
+                            placeholder="Procurar..."
+                            className="outline-none ml-4 w-full"
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </div>
                 </div>
 
-                <div className="basis-1/2 sm:flex-1 flex items-center py-2 px-4 rounded-md ring cursor-pointer">
-                    <MagnifyingGlassIcon className="size-5" />
-                    <input
-                        type="text"
-                        value={search}
-                        placeholder="Procurar..."
-                        className="outline-none ml-4 w-full"
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
-                </div>
+                <ListTournaments tournaments={filteredTournaments} />
             </div>
-
-            <ListTournaments tournaments={filteredTournaments} />
-        </div>
+        </>
     )
 }

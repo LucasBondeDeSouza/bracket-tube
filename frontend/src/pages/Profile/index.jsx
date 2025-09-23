@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 
 import { toast } from "react-toastify";
+
+import Header from "../../components/Header";
 import ListTournaments from "../../components/ListTournaments";
 
 export default () => {
@@ -45,16 +47,20 @@ export default () => {
     }, [])
 
     return (
-        <div className="flex items-center py-8">
-            <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
-                <h1 className="text-3xl font-bold">Meus Torneios</h1>
+        <>
+            <Header />
+            
+            <div className="flex items-center py-8">
+                <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
+                    <h1 className="text-3xl font-bold">Meus Torneios</h1>
 
-                <ListTournaments 
-                    tournaments={tournaments} 
-                    profile={true} 
-                    handleDelete={handleDelete}
-                />
+                    <ListTournaments 
+                        tournaments={tournaments} 
+                        profile={true} 
+                        handleDelete={handleDelete}
+                    />
+                </div>
             </div>
-        </div>
+        </>
     )
 }

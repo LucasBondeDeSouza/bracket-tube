@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext.jsx"
 import { toast } from "react-toastify";
 
+import Header from "../../components/Header";
 import FormTournamentCover from "../../components/FormTournamentCover/index.jsx";
 import FormTournamentAddVideos from "../../components/FormTournamentAddVideos/index.jsx";
 import FormTournamentHeader from "../../components/FormTournamentHeader/index.jsx";
@@ -97,28 +98,32 @@ export default () => {
     }
 
     return (
-        <div className="flex items-center py-8">
-            <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
-                <FormTournamentHeader tournamentId={tournamentId || tournament_id}  selectStage={selectStage} setSelectStage={setSelectStage} />
+        <>
+            <Header />
+            
+            <div className="flex items-center py-8">
+                <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
+                    <FormTournamentHeader tournamentId={tournamentId || tournament_id}  selectStage={selectStage} setSelectStage={setSelectStage} />
 
-                {selectStage === "create-tournament" && (
-                    <FormTournamentCover
-                        tournament_id={tournament_id}
-                        handleSubmit={handleSubmit}
-                        title={title} setTitle={setTitle}
-                        description={description} setDescription={setDescription}
-                        coverImage={coverImage} setCoverImage={setCoverImage}
-                        category={category} setCategory={setCategory}
-                    />
-                )}
+                    {selectStage === "create-tournament" && (
+                        <FormTournamentCover
+                            tournament_id={tournament_id}
+                            handleSubmit={handleSubmit}
+                            title={title} setTitle={setTitle}
+                            description={description} setDescription={setDescription}
+                            coverImage={coverImage} setCoverImage={setCoverImage}
+                            category={category} setCategory={setCategory}
+                        />
+                    )}
 
-                {selectStage === "add-videos" && (
-                    <FormTournamentAddVideos 
-                        setSelectStage={setSelectStage} 
-                        tournamentId={tournamentId || tournament_id} 
-                    />
-                )}
+                    {selectStage === "add-videos" && (
+                        <FormTournamentAddVideos 
+                            setSelectStage={setSelectStage} 
+                            tournamentId={tournamentId || tournament_id} 
+                        />
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
