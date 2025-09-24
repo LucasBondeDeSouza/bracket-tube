@@ -58,7 +58,7 @@ export default ({ tournaments, profile=false, handleDelete }) => {
                 </div>
             ) : (
                 <div className="flex items-center justify-center">
-                    <p>Nenhum torneio encontrado</p>
+                    <p className="text-gray-300">Nenhum torneio encontrado</p>
                 </div>
             )}
         </div>

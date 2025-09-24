@@ -41,7 +41,12 @@ export default () => {
                     </div>
 
                     <div className="mt-5 md:mt-0">
-                        <button onClick={() => navigate(`/tournament/${tournament._id}/play`)} className="w-full bg-red-500 font-bold text-xl py-2 px-4 rounded-lg cursor-pointer">Jogar</button>
+                        <button 
+                            onClick={() => {tournament.videos.length > 1 ? navigate(`/tournament/${tournament._id}/play`) : alert("É necessários 2 ou mais vídeos para jogar!")}} 
+                            className="w-full bg-red-500 font-bold text-xl py-2 px-4 rounded-lg cursor-pointer"
+                        >
+                            Jogar
+                        </button>
                     </div>
                 </div>
 

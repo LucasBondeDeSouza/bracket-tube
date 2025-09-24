@@ -21,36 +21,44 @@ export default ({ videos, setVideos, edit }) => {
     };
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-10">
-            {videos.map(video => (
-                <div 
-                    key={video._id} 
-                    className="relative w-full rounded-lg"
-                >
-                    <div className="aspect-w-16 aspect-h-9">
-                        <iframe
-                        className="w-full h-full"
-                        src={`https://www.youtube.com/embed/${video.video_id}`}
-                        title={video.title}
-                        frameBorder="0"
-                        allowFullScreen
-                        ></iframe>
-                    </div>
-                    <p className="mt-2 font-semibold">{video.title}</p>
+        <div className="my-10">
+            {videos.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {videos.map((video, index) => (
+                        <div 
+                            key={index} 
+                            className="relative w-full rounded-lg"
+                        >
+                            <div className="aspect-w-16 aspect-h-9">
+                                <iframe
+                                className="w-full h-full"
+                                src={`https://www.youtube.com/embed/${video.video_id}`}
+                                title={video.title}
+                                frameBorder="0"
+                                allowFullScreen
+                                ></iframe>
+                            </div>
+                            <p className="mt-2 font-semibold">{video.title}</p>
 
-                    {edit && (
-                        <div className="absolute right-1 top-1">
-                            <button 
-                                title="Excluir" 
-                                className="bg-red-600 rounded-full p-2 cursor-pointer"
-                                onClick={() => handleDelete(video._id)}
-                            >
-                                <TrashIcon className="w-5 h-5" />
-                            </button>
+                            {edit && (
+                                <div className="absolute right-1 top-1">
+                                    <button 
+                                        title="Excluir" 
+                                        className="bg-red-600 rounded-full p-2 cursor-pointer"
+                                        onClick={() => handleDelete(video._id)}
+                                    >
+                                        <TrashIcon className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            )}
                         </div>
-                    )}
+                    ))}
                 </div>
-            ))}
+            ) : (
+                <div className="flex items-center justify-center">
+                    <p className="text-gray-300">Nenhum vídeo encontrado nesse torneio</p>
+                </div>
+            )}
         </div>
     )
 }
