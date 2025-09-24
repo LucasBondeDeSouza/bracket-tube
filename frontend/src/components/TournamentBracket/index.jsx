@@ -19,7 +19,6 @@ function createMatches(videos) {
 }
 
 export default ({ videos, currentMatch, setCurrentMatch, matches, setMatches }) => {
-    const [round, setRound] = useState(1);
     const [winners, setWinners] = useState([]);
     const [selectedWinner, setSelectedWinner] = useState(null);
     const [bothAction, setBothAction] = useState(null);
@@ -43,9 +42,11 @@ export default ({ videos, currentMatch, setCurrentMatch, matches, setMatches }) 
             } else if (updatedWinners.length === 0) {
                 alert("⚠️ Nenhum vencedor nesta rodada!");
             } else {
-                const next = createMatches(updatedWinners);
+                // 🔥 embaralha aqui antes de criar os novos confrontos
+                const shuffled = shuffleArray([...updatedWinners]);
+                const next = createMatches(shuffled);
+
                 setMatches(next);
-                setRound(r => r + 1);
                 setCurrentMatch(0);
                 setWinners([]);
             }
