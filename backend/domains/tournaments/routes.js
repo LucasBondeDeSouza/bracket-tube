@@ -152,33 +152,32 @@ router.put("/:id", async (req, res) => {
 });
 
 router.get("/:id/videos", async (req, res) => {
-    connectDb()
+    connectDb();
     const { id } = req.params;
 
     try {
-        const { _id: owner } = await JWTVerify(req);
-
-        // Garante que o torneio existe
-        const tournament = await Tournament.findOne({ _id: id, owner });
+        // Primeiro pega o torneio
+        const tournament = await Tournament.findById(id);
         if (!tournament) {
             return res.status(404).json({ message: "Torneio não encontrado" });
         }
 
-        // Busca os vídeos relacionados ao torneio
+        // Depois pega os vídeos ligados a esse torneio
         const videos = await Video.find({ owner: id });
 
-        // Monta a resposta
-        const response = {
+        // Retorna o torneio junto com os vídeos
+        res.json({
             _id: tournament._id,
             title: tournament.title,
             description: tournament.description,
+            coverImage: tournament.coverImage,
+            category: tournament.category,
+            created_at: tournament.created_at,
             videos
-        };
-
-        res.json(response);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Erro ao buscar vídeos do torneio", error });
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erro ao buscar torneio e vídeos" });
     }
 });
 
