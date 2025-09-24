@@ -49,6 +49,7 @@ export default () => {
                 </div>
 
                 <TournamentBracket 
+                    title={tournament.title}
                     videos={tournament.videos} 
                     currentMatch={currentMatch}
                     setCurrentMatch={setCurrentMatch} 

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+import VideoWinner from "../VideoWinner";
 
 // Embaralhar array
 function shuffleArray(arr) {
@@ -18,10 +20,14 @@ function createMatches(videos) {
     return matches;
 }
 
-export default ({ videos, currentMatch, setCurrentMatch, matches, setMatches }) => {
+export default ({ title, videos, currentMatch, setCurrentMatch, matches, setMatches }) => {
+    const { tournament_id } = useParams();
     const [winners, setWinners] = useState([]);
     const [selectedWinner, setSelectedWinner] = useState(null);
     const [bothAction, setBothAction] = useState(null);
+    const [showVideoWinner, setShowVideoWinner] = useState(false)
+    const [finalWinner, setFinalWinner] = useState(null);
+    const [finalRunnerUp, setFinalRunnerUp] = useState(null);
 
     useEffect(() => {
         const shuffled = shuffleArray([...videos]);
@@ -38,7 +44,13 @@ export default ({ videos, currentMatch, setCurrentMatch, matches, setMatches }) 
             setCurrentMatch(currentMatch + 1);
         } else {
             if (updatedWinners.length === 1) {
-                alert("🏆 Campeão: " + updatedWinners[0].title);
+                const runnerUp = matches[currentMatch].home === updatedWinners[0]
+                    ? matches[currentMatch].away
+                    : matches[currentMatch].home;
+
+                setFinalWinner(updatedWinners[0]);
+                setFinalRunnerUp(runnerUp);
+                setShowVideoWinner(true);
             } else if (updatedWinners.length === 0) {
                 alert("⚠️ Nenhum vencedor nesta rodada!");
             } else {
@@ -162,6 +174,16 @@ export default ({ videos, currentMatch, setCurrentMatch, matches, setMatches }) 
                     Classificar os dois
                 </button>
             </div>
+
+            {showVideoWinner && finalWinner && (
+                <VideoWinner 
+                    title={title}
+                    tournament_id={tournament_id} 
+                    setShowVideoWinner={setShowVideoWinner} 
+                    winner={finalWinner} 
+                    runnerUp={finalRunnerUp} 
+                />
+            )}
         </>
     );
 };

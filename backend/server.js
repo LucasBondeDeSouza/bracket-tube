@@ -13,7 +13,7 @@ export const __dirname = dirname(__filename)
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "https://bracket-tube.vercel.app", //"http://localhost:5173",
+    origin: "https://bracket-tube.vercel.app",
     credentials: true,
 }))
 app.use("/tmp", express.static(__dirname + "/tmp"))
