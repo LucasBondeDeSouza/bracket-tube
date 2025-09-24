@@ -3,7 +3,7 @@ import Tournament from "./model.js"
 import Video from "../videos/model.js"
 import { JWTVerify } from "../../utils/jwt.js"
 import { connectDb } from "../../config/db.js"
-import { sendToS3, uploadImage } from "./controller.js";
+import { uploadImage } from "./controller.js";
 
 const router = Router()
 
@@ -61,30 +61,21 @@ router.post("/", async (req, res) => {
 })
 
 router.post("/upload", uploadImage().array("files", 1), async (req, res) => {
-    const { files } = req
+    try {
+        const { files } = req
 
-    const filesPromise = new Promise((resolve, reject) => {
-        const fileURLArray = []
+        if (!files || files.length === 0) {
+            return res.status(400).json({ message: "Nenhum arquivo enviado" })
+        }
 
-        files.forEach(async (file, index) => {
-            const { filename, path, mimetype } = file
+        // Cada arquivo já tem a URL no S3 em file.location
+        const fileURLs = files.map(file => file.location)
 
-            try {
-                const fileURL = await sendToS3(filename, path, mimetype)
-
-                fileURLArray.push(fileURL)
-
-                if (index === files.length - 1) resolve(fileURLArray)
-            } catch (error) {
-                console.error("Deu algum erro ao sair para o S3", error)
-                reject(error)
-            }
-        })
-    })
-
-    const fileURLArrayResolved = await filesPromise
-
-    res.json(fileURLArrayResolved)
+        res.json(fileURLs)
+    } catch (error) {
+        console.error("Erro ao fazer upload:", error)
+        res.status(500).json({ message: "Erro ao fazer upload", error })
+    }
 })
 
 router.delete("/", async (req, res) => {

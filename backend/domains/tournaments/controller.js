@@ -1,58 +1,33 @@
 import "dotenv/config"
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
-import fs from "fs"
-import download from "image-downloader"
-import mime from "mime-types"
+import { S3Client } from "@aws-sdk/client-s3"
 import multer from "multer"
-import { __dirname } from "../../server.js";
+import multerS3 from "multer-s3"
 
+// Pegando variáveis de ambiente
 const { S3_ACCESS_KEY, S3_SECRET_KEY, BUCKET } = process.env
 
-const getExtension = (path) => {
-    const mimeType = mime.lookup(path)
-    const contentType = mime.contentType(mimeType)
-    const extension = mime.extension(contentType)
+// Configurando cliente S3
+const s3 = new S3Client({
+    region: "us-east-1",
+    credentials: {
+        accessKeyId: S3_ACCESS_KEY,
+        secretAccessKey: S3_SECRET_KEY,
+    },
+})
 
-    return extension
-} 
-
-export const sendToS3 = async (filename, path, mimeType) => {
-    const client = new S3Client({ 
-        region: "us-east-1", 
-        credentials: {
-            accessKeyId: S3_ACCESS_KEY,
-            secretAccessKey: S3_SECRET_KEY,
-        },
-    })
-
-    const command = new PutObjectCommand({
-        Bucket: BUCKET,
-        Key: filename,
-        Body: fs.readFileSync(path),
-        ContentType: mimeType,
-        ACL: "public-read",
-    })
-
-    try {
-        await client.send(command)
-
-        return `https://${BUCKET}.s3.us-east-1.amazonaws.com/${filename}`
-    } catch (error) {
-        throw error
-    } 
-}
-
+// Função para criar middleware de upload
 export const uploadImage = () => {
-    const storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, `${__dirname}/tmp/`)
-        },
-        filename: function (req, file, cb) {
-            const extension = getExtension(file.originalname)
-
+  return multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: BUCKET,
+        acl: "public-read", // arquivo público
+        contentType: multerS3.AUTO_CONTENT_TYPE, // detecta o tipo automaticamente
+        key: function (req, file, cb) {
+            // Gera o nome do arquivo com timestamp e extensão original
+            const extension = file.originalname.split(".").pop()
             cb(null, `${Date.now()}.${extension}`)
-        }
-    })
-
-    return multer({ storage })
-} 
+        },
+    }),
+  })
+}
