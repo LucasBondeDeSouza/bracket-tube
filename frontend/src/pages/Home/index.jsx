@@ -6,19 +6,22 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import Header from "../../components/Header";
 import ListTournaments from "../../components/ListTournaments";
 import SelectCategory from "../../components/SelectCategory";
+import PageLoader from "../PageLoader"
 
 export default () => {
     const [category, setCategory] = useState("")
     const [tournaments, setTournaments] = useState([])
     const [search, setSearch] = useState("")
+    const [loading, setLoading] = useState(true);
     
     const fecthTournaments = async () => {
         try {
             const res = await axios.get("/tournaments")
-
             setTournaments(res.data)
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -34,6 +37,8 @@ export default () => {
 
         return matchesSearch && matchesCategory;
     });
+
+    if (loading) return <PageLoader />;
 
     return (
         <>

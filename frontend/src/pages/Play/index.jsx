@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
+
 import TournamentBracket from "../../components/TournamentBracket"
+import PageLoader from "../PageLoader";
 
 export default () => {
     const { tournament_id } = useParams();
@@ -10,6 +12,7 @@ export default () => {
     const [tournament, setTournament] = useState(null);
     const [currentMatch, setCurrentMatch] = useState(0);
     const [matches, setMatches] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchTournament = async () => {
@@ -18,13 +21,15 @@ export default () => {
                 setTournament(data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false)
             }
         };
 
         fetchTournament();
     }, [tournament_id]);
 
-    if (!tournament) return <p>Carregando...</p>;
+    if (loading) return <PageLoader />;
 
     return (
         <div className="flex items-center justify-center">

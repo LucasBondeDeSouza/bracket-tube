@@ -4,11 +4,13 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import ListVideosTournaments from "../../components/ListVideosTournaments";
+import PageLoader from "../PageLoader"
 
 export default () => {
     const { tournament_id } = useParams();
     const navigate = useNavigate()
     const [tournament, setTournament] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchTournament = async () => {
@@ -17,13 +19,15 @@ export default () => {
                 setTournament(data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false)
             }
         };
 
         fetchTournament();
     }, [tournament_id]);
 
-    if (!tournament) return <p>Carregando...</p>;
+    if (loading) return <PageLoader />;
 
     return (
         <>

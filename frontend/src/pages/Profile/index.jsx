@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 
 import Header from "../../components/Header";
 import ListTournaments from "../../components/ListTournaments";
+import PageLoader from "../PageLoader";
 
 export default () => {
     const [tournaments, setTournaments] = useState([])
+    const [loading, setLoading] = useState(true);
 
     const fecthMyTournaments = async () => {
         try {
@@ -16,6 +18,8 @@ export default () => {
             setTournaments(res.data)
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -45,6 +49,8 @@ export default () => {
     useEffect(() => {
         fecthMyTournaments()
     }, [])
+
+    if (loading) return <PageLoader />;
 
     return (
         <>

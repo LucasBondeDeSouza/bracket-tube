@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios"
 import { ArrowUpTrayIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import { toast } from "react-toastify";
@@ -6,11 +6,14 @@ import { toast } from "react-toastify";
 import SelectCategory from "../SelectCategory"
 
 export default ({ handleSubmit, title, setTitle, description, setDescription, coverImage, setCoverImage, category, setCategory }) => {
+    const [loading, setLoading] = useState(false)
 
     const uploadCoverImage = async (e) => {
         const file = e.target.files[0]
         const formData = new FormData()
         formData.append("files", file)
+
+        setLoading(true)
 
         try {
             const { data } = await axios.post("/tournaments/upload", formData, {
@@ -29,6 +32,8 @@ export default ({ handleSubmit, title, setTitle, description, setDescription, co
                 autoClose: 3000,
                 theme: "dark"
             })
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -65,7 +70,7 @@ export default ({ handleSubmit, title, setTitle, description, setDescription, co
                 <label className="text-3xl font-bold">Imagem de Capa</label>
                 <label
                     htmlFor="file"
-                    className="rounded-lg border h-52 flex flex-col items-center justify-center gap-2 cursor-pointer overflow-hidden"
+                    className="relative rounded-lg border h-52 flex flex-col items-center justify-center gap-2 cursor-pointer overflow-hidden"
                 >
                     <input type="file" id="file" className="hidden" accept="image/*" onChange={uploadCoverImage} />
 
@@ -81,6 +86,12 @@ export default ({ handleSubmit, title, setTitle, description, setDescription, co
                             <ArrowUpTrayIcon className="h-8 w-8" />
                             <span className="text-sm">Enviar Imagem</span>
                         </>
+                    )}
+
+                    {loading && (
+                        <div className="absolute inset-0 flex justify-center items-center bg-white/50">
+                            <div className="w-12 h-12 border-4 border-gray-300 border-t-red-500 rounded-full animate-spin"></div>
+                        </div>
                     )}
                 </label>
             </div>

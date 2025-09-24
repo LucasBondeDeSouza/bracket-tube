@@ -85,6 +85,12 @@ export default () => {
                 id = createdTournament._id
             }
 
+            toast.success("Torneio salvo com sucesso!", {
+                position: "top-right",
+                autoClose: 3000,
+                theme: "dark"
+            })
+
             navigate(`/create-tournament/${id}`)
             setSelectStage("add-videos")
         } catch (error) {
