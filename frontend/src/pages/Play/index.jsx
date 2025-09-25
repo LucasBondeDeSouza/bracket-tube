@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 
 import TournamentBracket from "../../components/TournamentBracket"
+import Footer from "../../components/Footer"
 import PageLoader from "../PageLoader";
 
 export default () => {
@@ -32,38 +33,42 @@ export default () => {
     if (loading) return <PageLoader />;
 
     return (
-        <div className="flex items-center justify-center">
-            <div className="relative min-h-screen w-full px-5 py-10 bg-zinc-900 flex flex-col items-center justify-between">
-                <div className="flex flex-col items-center mb-2">
-                    <h1 className="text-4xl font-bold line-clamp-1">
-                        {tournament.title}
-                    </h1>
+        <>
+            <div className="flex items-center justify-center">
+                <div className="relative min-h-screen w-full px-5 py-10 bg-zinc-900 flex flex-col items-center justify-between">
+                    <div className="flex flex-col items-center mb-2">
+                        <h1 className="text-4xl font-bold line-clamp-1">
+                            {tournament.title}
+                        </h1>
 
-                    <p className="text-gray-400 line-clamp-2 md:line-clamp-1">
-                        {tournament.description}
-                    </p>
+                        <p className="text-gray-400 line-clamp-2 md:line-clamp-1">
+                            {tournament.description}
+                        </p>
 
-                    <p className="font-bold text-xl">
-                        {currentMatch + 1} / {matches.length}
-                    </p>
-                </div>
+                        <p className="font-bold text-xl">
+                            {currentMatch + 1} / {matches.length}
+                        </p>
+                    </div>
 
-                <TournamentBracket 
-                    title={tournament.title}
-                    videos={tournament.videos} 
-                    currentMatch={currentMatch}
-                    setCurrentMatch={setCurrentMatch} 
-                    matches={matches}
-                    setMatches={setMatches}
-                />
+                    <TournamentBracket 
+                        title={tournament.title}
+                        videos={tournament.videos} 
+                        currentMatch={currentMatch}
+                        setCurrentMatch={setCurrentMatch} 
+                        matches={matches}
+                        setMatches={setMatches}
+                    />
 
-                <div 
-                    onClick={() => navigate(`/tournament/${tournament._id}`)} 
-                    className="absolute top-2 lg:top-5 left-2 lg:left-5 cursor-pointer"
-                >
-                    <ArrowLeftIcon className="size-7" />
+                    <div 
+                        onClick={() => navigate(`/tournament/${tournament._id}`)} 
+                        className="absolute top-2 lg:top-5 left-2 lg:left-5 cursor-pointer"
+                    >
+                        <ArrowLeftIcon className="size-7" />
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <Footer />
+        </>
     );
 };
