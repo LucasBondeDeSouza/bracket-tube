@@ -44,7 +44,7 @@ export default () => {
         <>
             <Header />
 
-            <div className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto">
+            <div className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto min-h-screen">
                 <div className="w-full flex items-center justify-between gap-4">
                     <div className="basis-1/2 sm:basis-auto sm:w-auto">
                         <SelectCategory category={category} setCategory={setCategory} />

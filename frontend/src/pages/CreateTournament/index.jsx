@@ -107,28 +107,26 @@ export default () => {
         <>
             <Header />
             
-            <div className="flex items-center py-8">
-                <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
-                    <FormTournamentHeader tournamentId={tournamentId || tournament_id}  selectStage={selectStage} setSelectStage={setSelectStage} />
+            <div className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto min-h-screen">
+                <FormTournamentHeader tournamentId={tournamentId || tournament_id}  selectStage={selectStage} setSelectStage={setSelectStage} />
 
-                    {selectStage === "create-tournament" && (
-                        <FormTournamentCover
-                            tournament_id={tournament_id}
-                            handleSubmit={handleSubmit}
-                            title={title} setTitle={setTitle}
-                            description={description} setDescription={setDescription}
-                            coverImage={coverImage} setCoverImage={setCoverImage}
-                            category={category} setCategory={setCategory}
-                        />
-                    )}
+                {selectStage === "create-tournament" && (
+                    <FormTournamentCover
+                        tournament_id={tournament_id}
+                        handleSubmit={handleSubmit}
+                        title={title} setTitle={setTitle}
+                        description={description} setDescription={setDescription}
+                        coverImage={coverImage} setCoverImage={setCoverImage}
+                        category={category} setCategory={setCategory}
+                    />
+                )}
 
-                    {selectStage === "add-videos" && (
-                        <FormTournamentAddVideos 
-                            setSelectStage={setSelectStage} 
-                            tournamentId={tournamentId || tournament_id} 
-                        />
-                    )}
-                </div>
+                {selectStage === "add-videos" && (
+                    <FormTournamentAddVideos 
+                        setSelectStage={setSelectStage} 
+                        tournamentId={tournamentId || tournament_id} 
+                    />
+                )}
             </div>
         </>
     )

@@ -43,7 +43,7 @@ export default () => {
         <>
             <Header />
             
-            <section className="flex items-center my-8">
+            <section className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto h-screen">
                 <div className="mx-auto max-w-96 flex flex-col items-center gap-4 w-full">
                     <h1 className="text-3xl font-bold">Faça seu cadastro</h1>
 

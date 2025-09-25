@@ -56,16 +56,14 @@ export default () => {
         <>
             <Header />
             
-            <div className="flex items-center py-8">
-                <div className="mx-auto max-w-7xl w-full px-4 sm:px-8">
-                    <h1 className="text-3xl font-bold">Meus Torneios</h1>
+            <div className="flex flex-col px-4 sm:px-8 py-8 max-w-7xl mx-auto min-h-screen">
+                <h1 className="text-3xl font-bold">Meus Torneios</h1>
 
-                    <ListTournaments 
-                        tournaments={tournaments} 
-                        profile={true} 
-                        handleDelete={handleDelete}
-                    />
-                </div>
+                <ListTournaments 
+                    tournaments={tournaments} 
+                    profile={true} 
+                    handleDelete={handleDelete}
+                />
             </div>
         </>
     )
