@@ -97,7 +97,11 @@ router.post("/login", async (req, res) => {
 })
 
 router.post("/logout", (req, res) => {
-    res.clearCookie("token").json("Deslogado com sucesso!")
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    }).json("Deslogado com sucesso!")
 })
 
 export default router
