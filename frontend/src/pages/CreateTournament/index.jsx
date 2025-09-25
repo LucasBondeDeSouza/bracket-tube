@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import FormTournamentCover from "../../components/FormTournamentCover/index.jsx";
 import FormTournamentAddVideos from "../../components/FormTournamentAddVideos/index.jsx";
 import FormTournamentHeader from "../../components/FormTournamentHeader/index.jsx";
+import Footer from "../../components/Footer"
 
 export default () => {
     const { user } = useUserContext()
@@ -128,6 +129,8 @@ export default () => {
                     />
                 )}
             </div>
+
+            <Footer />
         </>
     )
 }

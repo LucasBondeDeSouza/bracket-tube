@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 import Header from "../../components/Header";
 import ListTournaments from "../../components/ListTournaments";
+import Footer from "../../components/Footer"
 import PageLoader from "../PageLoader";
 
 export default () => {
@@ -65,6 +66,8 @@ export default () => {
                     handleDelete={handleDelete}
                 />
             </div>
+
+            <Footer />
         </>
     )
 }

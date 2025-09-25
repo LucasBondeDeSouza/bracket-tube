@@ -6,6 +6,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import Header from "../../components/Header";
 import ListTournaments from "../../components/ListTournaments";
 import SelectCategory from "../../components/SelectCategory";
+import Footer from "../../components/Footer"
 import PageLoader from "../PageLoader"
 
 export default () => {
@@ -64,6 +65,8 @@ export default () => {
 
                 <ListTournaments tournaments={filteredTournaments} />
             </div>
+
+            <Footer />
         </>
     )
 }

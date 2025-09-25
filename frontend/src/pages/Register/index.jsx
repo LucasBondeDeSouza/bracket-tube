@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useUserContext } from "../../context/UserContext";
 
 import Header from "../../components/Header";
+import Footer from "../../components/Footer"
 
 export default () => {
     const { setUser } = useUserContext()
@@ -83,6 +84,8 @@ export default () => {
                     <p>Já tem uma conta? <Link to={'/login'} className="underline font-semibold">Logue aqui!</Link></p>
                 </div>
             </section>
+
+            <Footer />
         </>
     )
 }

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useUserContext } from "../../context/UserContext";
 
 import Header from "../../components/Header";
+import Footer from "../../components/Footer"
 
 export default () => {
     const { user, setUser } = useUserContext()
@@ -72,6 +73,8 @@ export default () => {
                     <p>Ainda não tem uma conta? <Link to={'/register'} className="underline font-semibold">Registre-se aqui!</Link></p>
                 </div>
             </section>
+
+            <Footer />
         </>
     )
 }

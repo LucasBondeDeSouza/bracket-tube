@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import ListVideosTournaments from "../../components/ListVideosTournaments";
+import Footer from "../../components/Footer"
 import PageLoader from "../PageLoader"
 
 export default () => {
@@ -52,6 +53,8 @@ export default () => {
 
                 <ListVideosTournaments videos={tournament.videos} edit={false} />
             </div>
+
+            <Footer />
         </>
     );
 };

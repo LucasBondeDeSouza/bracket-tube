@@ -12,7 +12,6 @@ import CreateTournament from "./pages/CreateTournament";
 import Profile from "./pages/Profile";
 import Tournament from "./pages/Tournament";
 import Play from "./pages/Play";
-import Footer from "./components/Footer";
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 axios.defaults.withCredentials = true
@@ -32,8 +31,6 @@ export default () => {
             <Route path="/tournament/:tournament_id" element={<Tournament />} />
             <Route path="/tournament/:tournament_id/play" element={<Play />} />
           </Routes>
-
-          <Footer />
         </BrowserRouter>
       </UserContextProvider>
 
