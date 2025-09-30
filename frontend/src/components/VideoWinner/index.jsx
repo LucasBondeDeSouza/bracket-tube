@@ -24,7 +24,7 @@ export default ({ title, tournament_id, setShowVideoWinner, winner, runnerUp }) 
                 ref={modalRef}
                 className="bg-[#111] rounded-lg shadow-lg w-11/12 md:w-4/5 lg:w-3/4 max-h-[90vh] overflow-y-auto"
             >
-                <div className="p-4 flex justify-between"> 
+                <div className="p-4 flex items-start justify-between"> 
                     <h2 className="text-white text-3xl font-bold">{title}</h2>
                     <button 
                         onClick={() => navigate(`/tournament/${tournament_id}`)} 
