@@ -114,7 +114,7 @@ export default ({ title, videos, currentMatch, setCurrentMatch, matches, setMatc
             <div className="flex flex-col md:flex-row w-full md:gap-3 gap-5 items-center justify-center relative md:px-10 cursor-pointer">
                 {/* Vídeo 1 */}
                 {match.home && (
-                    <div className={`flex flex-col gap-2 w-full md:w-1/2 h-[250px] md:h-[350px] hover:scale-105 transition ${getWinnerClass(match.home)} ${getLoserClass(match.home)} ${getBothClass()}`}>
+                    <div className={`flex flex-col gap-2 w-full md:w-1/2 h-[350px] md:h-[350px] hover:scale-105 transition ${getWinnerClass(match.home)} ${getLoserClass(match.home)} ${getBothClass()}`}>
                         <iframe
                             className="w-full h-full rounded-2xl"
                             src={`https://www.youtube.com/embed/${match.home.video_id}?autoplay=1&mute=1&rel=0&modestbranding=1`}
