@@ -138,7 +138,7 @@ export default ({ title, videos, currentMatch, setCurrentMatch, matches, setMatc
 
                 {/* Vídeo 2 */}
                 {match.away && (
-                    <div className={`flex flex-col gap-2 w-full md:w-1/2 h-[250px] md:h-[350px] hover:scale-105 transition ${getWinnerClass(match.away)} ${getLoserClass(match.away)} ${getBothClass()}`}>
+                    <div className={`flex flex-col gap-2 w-full md:w-1/2 h-[350px] md:h-[350px] hover:scale-105 transition ${getWinnerClass(match.away)} ${getLoserClass(match.away)} ${getBothClass()}`}>
                         <iframe
                             className="w-full h-full rounded-2xl"
                             src={`https://www.youtube.com/embed/${match.away.video_id}?autoplay=1&mute=1&rel=0&modestbranding=1`}
